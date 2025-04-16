@@ -4,29 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Spumpers!</title>
+
+  <meta property="og:title" content="Spumpers are better than you can imagine" />
+  <meta property="og:description" content="The ultimate spumper experience!" />
+  <meta property="og:image" content="https://i.imgur.com/vjJbbhO.png" />
+  <meta property="og:url" content="https://spumper.site" />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Spumpers are better than you can imagine" />
+  <meta name="twitter:description" content="The ultimate spumper experience!" />
+  <meta name="twitter:image" content="https://i.imgur.com/vjJbbhO.png" />
+
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('https://i.imgur.com/vjJbbhO.png') no-repeat center center fixed;
+      background-image: url('https://i.imgur.com/vjJbbhO.png');
       background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: #333;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      position: relative;
     }
 
     h1 {
@@ -35,7 +39,7 @@
       max-width: 90%;
       margin: 1em 0 0.5em;
       color: #2c3e50;
-      animation: fadeInUp 0.8s ease-out both;
+      animation: fadeInUp 1s ease forwards;
     }
 
     img {
@@ -45,8 +49,7 @@
       border-radius: 16px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       margin-bottom: 2em;
-      animation: fadeInUp 1s ease-out both;
-      animation-delay: 0.2s;
+      animation: fadeInUp 1.2s ease forwards;
     }
 
     .buttons {
@@ -56,6 +59,7 @@
       display: flex;
       flex-direction: column;
       gap: 1em;
+      animation: fadeInDown 1s ease forwards;
     }
 
     .buttons a {
@@ -78,95 +82,100 @@
       position: fixed;
       bottom: 1.5em;
       right: 1.5em;
-      padding: 12px 18px;
       background-color: #e67e22;
       color: white;
-      font-size: 1em;
       border: none;
       border-radius: 12px;
+      padding: 12px 20px;
+      font-size: 1em;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
       transition: background-color 0.3s ease;
-      z-index: 999;
+      z-index: 1000;
     }
 
     .moo-button:hover {
       background-color: #d35400;
     }
 
-    .modal {
-      display: none;
+    .popup-overlay {
       position: fixed;
-      z-index: 1000;
-      left: 0;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
       align-items: center;
+      justify-content: center;
+      z-index: 999;
     }
 
-    .modal-content {
-      background-color: #fff;
-      border-radius: 8px;
-      padding: 30px;
-      width: 400px;
+    .popup {
+      background: white;
+      padding: 2em;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      max-width: 90%;
+      width: 320px;
       text-align: center;
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .modal h2 {
-      margin-bottom: 20px;
-      color: #e67e22;
-    }
-
-    .modal input {
-      padding: 10px;
+    .popup input {
+      width: 100%;
+      padding: 0.5em;
+      margin-top: 1em;
       font-size: 1em;
       border: 1px solid #ccc;
       border-radius: 8px;
-      width: 80%;
-      margin-bottom: 20px;
     }
 
-    .modal button {
-      padding: 10px 20px;
-      background-color: #e67e22;
+    .popup button {
+      margin-top: 1em;
+      padding: 0.5em 1em;
+      background-color: #3498db;
       color: white;
-      font-size: 1em;
       border: none;
       border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .modal button:hover {
-      background-color: #d35400;
-    }
-
-    .close {
-      color: #aaa;
-      font-size: 28px;
-      font-weight: bold;
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      cursor: pointer;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    #errorMessage {
-      color: red;
       font-size: 1em;
-      margin-bottom: 10px;
-      display: none;
+      cursor: pointer;
+    }
+
+    .popup .error {
+      color: red;
+      margin-top: 1em;
+      height: 1.2em;
+    }
+
+    @media (max-width: 600px) {
+      .buttons {
+        top: auto;
+        bottom: 2em;
+        right: 1em;
+        flex-direction: row;
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -181,50 +190,35 @@
 
   <img src="https://i.imgur.com/tPpjde9.png" alt="Spumpers Image" />
 
-  <button class="moo-button" onclick="showModal()">MOO</button>
+  <button class="moo-button" onclick="openPopup()">MOO</button>
 
-  <div id="passwordModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2>Enter Moo Password</h2>
-      <p id="errorMessage">Incorrect password.</p>
-      <input type="password" id="passwordInput" placeholder="Password" oninput="clearErrorMessage()">
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+      <div>Enter Password</div>
+      <input type="password" id="passwordInput" placeholder="Password"/>
       <button onclick="checkPassword()">Submit</button>
+      <div class="error" id="errorText"></div>
     </div>
   </div>
 
   <script>
-    function showModal() {
-      document.getElementById('passwordModal').style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('passwordModal').style.display = 'none';
+    function openPopup() {
+      document.getElementById("popupOverlay").style.display = "flex";
+      document.getElementById("errorText").textContent = "";
+      document.getElementById("passwordInput").value = "";
     }
 
     function checkPassword() {
-      const input = document.getElementById('passwordInput').value;
-      const errorMessage = document.getElementById('errorMessage');
+      const input = document.getElementById("passwordInput").value;
+      document.getElementById("errorText").textContent = "Incorrect password.";
+    }
 
-      if (input !== '') {
-        errorMessage.style.display = 'block';
-        setTimeout(() => {
-          errorMessage.style.display = 'none';
-        }, 2000);
+    window.addEventListener("click", function(event) {
+      const overlay = document.getElementById("popupOverlay");
+      if (event.target === overlay) {
+        overlay.style.display = "none";
       }
-    }
-
-    function clearErrorMessage() {
-      const errorMessage = document.getElementById('errorMessage');
-      errorMessage.style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-      const modal = document.getElementById('passwordModal');
-      if (event.target === modal) {
-        closeModal();
-      }
-    }
+    });
   </script>
 
 </body>
