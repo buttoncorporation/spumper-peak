@@ -98,6 +98,26 @@
       background-color: #d35400;
     }
 
+    .hof-button {
+      position: fixed;
+      bottom: 1.5em;
+      left: 1.5em;
+      background-color: #9b59b6;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-size: 1em;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+
+    .hof-button:hover {
+      background-color: #8e44ad;
+    }
+
     .popup-overlay {
       position: fixed;
       top: 0;
@@ -191,6 +211,7 @@
   <img src="https://i.imgur.com/tPpjde9.png" alt="Spumpers Image" />
 
   <button class="moo-button" onclick="openPopup()">MOO</button>
+  <a href="/hof" class="hof-button">Hall of Fame</a>
 
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup">
