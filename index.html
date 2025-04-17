@@ -241,7 +241,7 @@
     });
 
     // Load buttons from links.txt
-    fetch('links.txt')
+    fetch('links.txt?nocache=' + new Date().getTime())
       .then(response => response.text())
       .then(text => {
         const lines = text.trim().split('\n');
