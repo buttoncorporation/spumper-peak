@@ -201,9 +201,8 @@
 </head>
 <body>
 
-  <div class="buttons">
-    <a href="https://gamebanana.com/mods/540742" target="_blank">spumper</a>
-    <a href="https://gamebanana.com/mods/587648" target="_blank">spumperer</a>
+  <div class="buttons" id="buttonsContainer">
+    <!-- Buttons will be loaded here from links.txt -->
   </div>
 
   <h1>There's only one thing you need in life. SPUMPERS!!!!</h1>
@@ -240,6 +239,28 @@
         overlay.style.display = "none";
       }
     });
+
+    // Load buttons from links.txt
+    fetch('links.txt')
+      .then(response => response.text())
+      .then(text => {
+        const lines = text.trim().split('\n');
+        const container = document.getElementById('buttonsContainer');
+
+        lines.forEach(line => {
+          const [label, url] = line.split(',').map(part => part.trim());
+          if (label && url) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.target = '_blank';
+            a.textContent = label;
+            container.appendChild(a);
+          }
+        });
+      })
+      .catch(err => {
+        console.error('Could not load links.txt:', err);
+      });
   </script>
 
 </body>
